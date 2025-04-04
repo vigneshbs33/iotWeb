@@ -44,7 +44,7 @@ document.addEventListener("DOMContentLoaded", async () => {
             sessionStorage.setItem('username', person['name']);
             sessionStorage.setItem('access_id', inputtedId);
             sessionStorage.setItem('access_key', inputtedPasskey);
-            window.location.href = 'user/' + person["type"] + ".html"
+            window.location.href = 'user/' + person["type"] + "/dashboard.html"
             invalidIdLabel.innerHTML = ""
         }
         else {

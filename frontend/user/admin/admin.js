@@ -14,12 +14,14 @@ document.addEventListener('DOMContentLoaded', async () => {
             method: "POST",
             headers: header,
             body: JSON.stringify({_id: addToId.value})
-        })
+        }).then(response => response.json());
+
         const buyDate = currDate.getDate().toString().padStart(2, '0')
                         + '/' + (currDate.getMonth() + 1).toString().padStart(2, '0')
                         + '/' + currDate.getFullYear().toString().substr(-2);
         const buyTime = currDate.getHours().toString().padStart(2, '0') + ':' + currDate.getMinutes().toString().padStart(2, '0');
         const personName = personInfo['name'];
+        console.log(personInfo);
 
         let payload = {
             buyer_id: addToId.value,
@@ -38,10 +40,14 @@ document.addEventListener('DOMContentLoaded', async () => {
         }).then(response => response.json())
 
         if (transact){
-            document.getElementById('statusLabel').innerHTML = 'Succesfully added amount';
+            alert('Succesfully added amount')
+            // document.getElementById('statusLabel').innerHTML = 'Succesfully added amount';
+            location.reload();
         }
         else{
-            document.getElementById('statusLabel').innerHTML = 'Something went wrong...';
+            alert('Something went wrong...');
+            // document.getElementById('statusLabel').innerHTML = 'Something went wrong...';
+            location.reload();
         }
     })
 

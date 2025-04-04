@@ -216,8 +216,7 @@ app.post('/makeTransaction', async(req, res) => {
             }
         }, {upsert:true}
     )
-    console.log(updateBalanceAmount);
-    console.log(updateUserBalance);
+
     if (updateUserBalance){
         const addToTransactionHistory = await transactionHistory.updateOne(
             {_id: newSlNum},
@@ -226,7 +225,7 @@ app.post('/makeTransaction', async(req, res) => {
                 buy_date:payload['buy_date'],
                 buy_time:payload['buy_time'],
                 buyer_id:payload['buyer_id'],
-                buyer_name:['buyer_name'],
+                buyer_name:payload['buyer_name'],
                 item_id:payload['item_id'],
                 item_name:payload['item_name'],
                 item_price:payload['item_price'],
@@ -242,6 +241,32 @@ app.post('/makeTransaction', async(req, res) => {
     }
     
     res.json(result);
+})
+
+app.post('/changeCredentials', async(req, res) => {
+    const payload = req.body;
+    const updateCred = await loginInfo.updateOne(
+        {_id: payload['_id']},
+        {$set : {
+            access_key: payload['access_key'],
+            access_id: payload['access_id']
+        }}, {}
+    )
+    console.log(payload);
+    console.log(updateCred);
+    res.json(updateCred);
+})
+
+app.post('/setTransactionLimit', async(req, res) => {
+    const payload = req.body;
+    const updateCred = await peopleInfo.updateOne(
+        {_id: payload['_id']},
+        {$set : {
+            transaction_limit: payload['transaction_limit']
+        }}, {}
+    )
+
+    res.json(updateCred);
 })
 
 app.listen(port, () => console.log(`Server running on http://localhost:${port}`));

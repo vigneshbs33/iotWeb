@@ -34,7 +34,12 @@ const main = async () => {
 		row.style.textAlign = "center"
 		teacherName.style.textAlign = "center";
 		percent.style.textAlign = "center";
-		teacherName.innerHTML = classInfo[0]['teacher_name'];
+		if (classInfo[0]['teacher_name'] == 'Priya N V')
+			teacherName.innerHTML = 'Math';
+		else if (classInfo[0]['teacher_name'] == 'Shilpa T')
+			teacherName.innerHTML = 'IPP';
+		else
+			teacherName.innerHTML = classInfo[0]['teacher_name'];
 		percent.innerHTML = classInfo[classInfo.length-1].toFixed(2) + "%";
 
 		for (let j = 0; j < classInfo.length - 1; j++) {
@@ -42,13 +47,20 @@ const main = async () => {
 			let newRow = table.insertRow();
 			let slNumCell = newRow.insertCell(0);
 			let teacherNameCell = newRow.insertCell(1);
-			let dateCell = newRow.insertCell(2);
-			let classStartTimeCell = newRow.insertCell(3);
-			let classEndTimeCell = newRow.insertCell(4);
-			let status = newRow.insertCell(5);
+			let subjectCell = newRow.insertCell(2);
+			let dateCell = newRow.insertCell(3);
+			let classStartTimeCell = newRow.insertCell(4);
+			let classEndTimeCell = newRow.insertCell(5);
+			let status = newRow.insertCell(6);
 
 			slNumCell.innerHTML = classInfo[j]['sl_num'];
 			teacherNameCell.innerHTML = classInfo[j]['teacher_name'];
+			if (classInfo[0]['teacher_name'] == 'Priya N V')
+				subjectCell.innerHTML = 'Math';
+			else if (classInfo[0]['teacher_name'] == 'Shilpa T')
+				subjectCell.innerHTML = 'IPP';
+			else
+				subjectCell.innerHTML = classInfo[0]['teacher_name'];
 			dateCell.innerHTML = classInfo[j]['date'];
 			classStartTimeCell.innerHTML = classInfo[j]['start_time'];
 			classEndTimeCell.innerHTML = classInfo[j]['end_time'];
